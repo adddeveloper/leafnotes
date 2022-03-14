@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | leafnotes</title>
+    <link rel="shortcut icon" href="style/images/favicon/favicon.ico">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- paper -->
+    <link rel="stylesheet" href="style/libs/paper.min.css">
+    <!-- animation -->
+    <link rel="stylesheet" href="style/libs/animation.min.css">
+    <!-- my css -->
+    <link rel="stylesheet" href="style/src/index.css">
+</head>
+<body style="background: #f8f9fa;"></body>
+    <h1 class="text-center">Welcome to Leafnotes</h1>
+    <!-- document -->
+    <div class="my-5 container-fluid d-flex justify-content-center align-items-center">
+        <div class="mb-5 document">
+            <div class="bg-light container-fluid d-flex justify-content-center align-items-center">
+                <img src="style/images/favicon/favicon.ico" class="me-5 border-0">
+                <div class="d-flex">
+                    <input type="text" class="text-dark my-0 py-0" placeholder="untitled">
+                    <input type="text" class="text-dark my-0 py-0" placeholder=".txt">
+                </div>
+                <style></style>
+                <button class="buttons my-0 py-0">save</button>
+            </div>
+            <div contenteditable="true" class="paper-document my-2 p-3 textarea"></div>
+        </div>        
+    </div>
+    
+    <style>
+        .paper-document{
+            outline: none !important;
+            resize: none !important;
+            overflow: scroll;
+        } 
+        .document{
+            overflow: scroll;
+            height: 550px;
+            width: 650px;
+            border: solid 1px black !important;
+            background: white;
+            box-shadow: 0 1px 3px 1px rgb(60 64 67 / 15%);
+            border-radius: 0 !important;
+        }
+        /* @media screen and (max-width: 800px) {
+            
+        } */
+    </style>
+    <!-- <script src="script/libs/pdfmake.js"></script> -->
+    <script src="script/libs/filesaver.js"></script>
+    <script src="script/src/loaddata.js"></script>
+    <script src="script/src/style.js"></script>
+    <script src="script/src/editor.js"></script>
+</body>
+</html>
