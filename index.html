@@ -17,47 +17,117 @@
     <!-- my css -->
     <link rel="stylesheet" href="style/src/index.css">
 </head>
-<body style="background: #f8f9fa;"></body>
-    <h1 class="text-center">Welcome to Leafnotes</h1>
-    <!-- document -->
-    <div class="my-5 container-fluid d-flex justify-content-center align-items-center">
-        <div class="mb-5 document">
-            <div class="bg-light container-fluid d-flex justify-content-center align-items-center">
-                <img src="style/images/favicon/favicon.ico" class="me-5 border-0">
-                <div class="d-flex">
-                    <input type="text" class="text-dark my-0 py-0" placeholder="untitled">
-                    <input type="text" class="text-dark my-0 py-0" placeholder=".txt">
-                </div>
-                <style></style>
-                <button class="buttons my-0 py-0">save</button>
+<body onload="function loadded(){
+    var inputRadio = document.querySelector('input[name=\'choose\']:checked');
+    if(!inputRadio && localStorage.getItem('choose')){
+        document.getElementById(localStorage.getItem('choose')).checked = true;
+    } else if(inputRadio && !localStorage.getItem('choose')){
+        localStorage.setItem('choose', inputRadio.id)
+    } else  if(!inputRadio && !localStorage.getItem('choose')){
+        document.querySelector('#no').checked = true;
+        localStorage.setItem('choose', 'no')
+    }
+}loadded()">
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+        <h1 class="p-0 m-0">Welcome to LeafNotes</h1>
+        <p class="p-0 m-0">
+            This is a online note taking website, 
+            I hope you enjoy my product. If so, tell me:
+        </p>
+        <!-- info on me -->
+        <div class="container d-flex justify-content-evenly align-items-center">
+            <div class="container d-flex justify-content-evenly align-items-center">
+            <a target="_blank" href="https://www.adnans.ml/contact-me/index.html">
+                <i class="bi bi-envelope-paper"></i>
+            </a>
+            <a target="_blank" href="https://www.instagram.com/adnanscode/">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a target="_blank" href="https://github.com/adddeveloper">
+                <i class="bi bi-github"></i>
+            </a>
+            <a target="_blank" href="https://www.youtube.com/channel/UCZ0GqtCuXYJ99XVY1aiyHOg">
+                <i class="bi bi-youtube"></i>
+            </a>
+            <a target="_blank" href="https://twitter.com/adnanscode">
+                <i class="bi bi-twitter"></i>
+            </a>
             </div>
-            <div contenteditable="true" class="paper-document my-2 p-3 textarea"></div>
-        </div>        
+        </div>
+        <!-- document holder -->
+        <div id="dropbox" class="container-fluid document-element">
+            <!-- document border -->
+            <div class="mt-5 my-1 align-items-center d-flex justify-content-center">
+                <p class="px-3 p-0 m-0">Save and Load your files with style:</p>
+                <input type="radio" id="yes" name="choose">
+                <label class="me-3 mx-1" for="yes">YES</label>
+                <input type="radio" id="no" name="choose">
+                <label class="mx-1" for="no">NO</label>
+            </div>
+            <div class="mb-2 m-0 p-0 align-items-center d-flex justify-content-center">
+                <p class="px-3 p-0 m-0">(YES will save and load with the selected
+                    style, while NO will save and load without the selected style)</p>
+            </div>
+            <div class="mb-4 notepad-holder border-1">
+                <!-- notepad heading (tab inof) + menu -->
+                <div style="height: fit-content; border-bottom: none;" class="border-dark document-note">
+                    <div class="container-fluid">
+                        <!-- tab info -->
+                        <div class="align-items-center d-flex justify-content-evenly">
+                            <img class="m-0 border-0" src="style/images/favicon/favicon.ico" alt="website icon">
+                            <input id="fileName" placeholder="untitled" class="m-0 text-dark p-0 border-dark" type="text">
+                            <input id="fileEx" style="padding: 0 0 0 5px!important;" placeholder=".txt" class="text-dark p-0 border-dark" type="text">
+                            <button id="fileSave" class="btn-success m-0 py-0">save</button>
+                            <button onclick="clickinput()" class="btn-warning m-0 py-0">open</button>
+                        </div>
+                        <!-- menu -->
+                        <div class="my-1 align-items-center d-flex justify-content-evenly">
+                            <div class="my-1 align-items-center d-flex justify-content-evenly">
+                                <button onclick="function clickcolor(){
+                                    document.getElementById('color').click();
+                                }clickcolor()" class="mx-1 p-0 bg-secondary border-dark text-light py-0">
+                                    <b>A</b>
+                                    <input id="color" class="border-0 m-0 p-0" type="color" style="height: 7px;">
+                                </button>
+                                <button id="fontholder" class="mx-1 p-0 bg-secondary border-dark text-light py-0">
+                                    <span id="up" style="border-right: solid;" class="me-1 border-1 border-dark">
+                                        <i class="bi bi-chevron-up"></i>
+                                    </span>
+                                    <span id="number">0</span>
+                                    <!-- <input id="number" class="text-light" type="number"> -->
+                                    <span id="down" style="border-left: solid;" class="ms-1 border-1 border-dark">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <button id="bold" class="bg-secondary border-dark text-light py-0"><b>bold</b></button>
+                            <button id="underline" class="bg-secondary border-dark text-light py-0"><u>underline</u></button>
+                            <button id="italic" class="bg-secondary border-dark text-light py-0"><i>italic</i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- notepad -->
+                <div class="border-top border-1 document-note border-dark">
+                    <div designmode="true" id="textelement" spellcheck="false" contenteditable="true" class="container"></div>
+                    <script>
+                        var textelement = document.getElementById("textelement");
+                    </script>
+                </div>     
+            </div>
+        </div>
+        <p>
+            If you can't use drag and drop for some reason then you can just:
+        </p>
+        <input type="file" id="inputFile" class="mb-5 bg-dark text-light">
+        <script>
+            function clickinput(){
+                var inputel= document.getElementById("inputFile");
+                inputel.click();
+            }
+        </script>
     </div>
-    
-    <style>
-        .paper-document{
-            outline: none !important;
-            resize: none !important;
-            overflow: scroll;
-        } 
-        .document{
-            overflow: scroll;
-            height: 550px;
-            width: 650px;
-            border: solid 1px black !important;
-            background: white;
-            box-shadow: 0 1px 3px 1px rgb(60 64 67 / 15%);
-            border-radius: 0 !important;
-        }
-        /* @media screen and (max-width: 800px) {
-            
-        } */
-    </style>
-    <!-- <script src="script/libs/pdfmake.js"></script> -->
     <script src="script/libs/filesaver.js"></script>
     <script src="script/src/loaddata.js"></script>
     <script src="script/src/style.js"></script>
-    <script src="script/src/editor.js"></script>
 </body>
 </html>

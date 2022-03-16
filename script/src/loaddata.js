@@ -1,75 +1,77 @@
-const dropbox = document.querySelector(".dropbox");
-const input = document.querySelector(".dropboxOpen");
-const inputOne = document.querySelector(".inputOne");
-const title = document.getElementById("title");
-const saveasinput = document.getElementById("saveasinput");
+// html element (ui)
+const dropbox = document.getElementById("dropbox"),
+input = document.getElementById("inputFile"),
+fileName = document.getElementById("fileName"),
+fileEx = document.getElementById("fileEx"),
+fileSave = document.getElementById("fileSave");
+// saved format
 var file, reader, type, titlename, typefile;
 // file naming
 type =".txt";
-typefile = "text/plain";
 titlename = "untitled" + type;
-saveasinput.addEventListener("change", ()=>{
-    type = saveasinput.value;
-    if(title.value == ''){
+fileEx.addEventListener("change", ()=>{
+    type = fileEx.value;
+    if(fileName.value == ''){
         titlename = "untitled" + type;
     } else {
-        titlename = title.value + type;
+        titlename = fileName.value + type;
     }
+})
+fileName.addEventListener("change", ()=>{
+    titlename = fileName.value + type;
+})
+document.querySelectorAll("input[name=\"choose\"]").forEach(el=>{
+    el.addEventListener("change", ()=>{
+        localStorage.setItem("choose", document.querySelector("input[name=\"choose\"]:checked").id)
+    })
+})
+function saveFile(){
+    // check first
+    var inputRadio = document.querySelector("input[name=\"choose\"]:checked");
+    if(!inputRadio && localStorage.getItem("choose")){
+        document.getElementById(localStorage.getItem("choose")).checked = true;
+    } else if(inputRadio && !localStorage.getItem("choose")){
+        localStorage.setItem("choose", inputRadio.id)
+    } else  if(!inputRadio && !localStorage.getItem("choose")){
+        document.querySelector("#no").checked = true;
+        localStorage.setItem("choose", "no")
+    }
+    if(inputRadio.id == "no"){
+        allvalue =  document.querySelector("div[contenteditable=\"true\"]").innerText;
+        var files = new File([allvalue], titlename, {type: "text/plain;charset=utf-8"});
+        saveAs(files);
+    } else if(inputRadio.id == "yes"){
+        allvalue =  document.querySelector("div[contenteditable=\"true\"]").innerHTML;
+        var files = new File([allvalue], titlename, {type: "text/plain;charset=utf-8"});
+        saveAs(files);
+    }
+    
+}
+fileSave.addEventListener("click", ()=>{
+    saveFile();
 })
 // retrieving data
 reader = new FileReader();
-
-title.addEventListener("change", ()=>{
-    titlename = title.value + type;
-})
-function saveFile(){
-    allvalue = ""
-    val.forEach(element => {
-        allvalue = allvalue + element.innerText + "\n\n";
-    });
-    var files = new File([allvalue], titlename, {type: "text/plain;charset=utf-8"});
-    saveAs(files);
-}
-// inputs
-// input for the start
 input.addEventListener("change", (e)=>{
-    file = input.files[0];
+    file = input.files[input.files.length-1];
     reader.onload= ()=>{
-        reader.result.split("\n").forEach(items =>{
-            document.getElementById("page1").childNodes[0].innerHTML+= '<div>'+items+'</div>';
-        });
-        document.querySelector(".continue").classList.remove("d-none")
-        document.querySelector(".continue").classList.add("animate__backInRight")
+        var inputRadio = document.querySelector("input[name=\"choose\"]:checked");
+        if(inputRadio.id == "no"){
+            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result;
+        } else if(inputRadio.id == "yes"){
+            document.querySelector("div[contenteditable=\"true\"]").innerHTML = reader.result;
+        }
     }
-    reader.readAsText(input.files[0]);    
+    reader.readAsText(file);    
 })
-// input for the edit
-inputOne.addEventListener("change", (e)=>{
-    file = input.files[0];
-
-    reader.onload= ()=>{
-        reader.result.split("\n").forEach(items =>{
-            document.getElementById("page1").childNodes[0].innerHTML+= '<div>'+items+'</div>';
-        });
-    }
-    reader.readAsText(inputOne.files[0]);    
-})
-// dropbox
-// drag and drop
-var background = [
-    document.getElementById("thisone"),
-    document.getElementById("thissecond"),
-]
 dropbox.addEventListener("dragover", (e)=>{
     // add a :hover class here
-    dropbox.classList.add("animate__animated")
-    dropbox.classList.add("animate__shakeY")
     e.preventDefault();
 })
 dropbox.addEventListener("dragleave", ()=>{
     // add a :hover-remove class here
-    dropbox.classList.remove("animate__animated")
-    dropbox.classList.remove("animate__shakeY")
+    // dropbox.classList.remove("animate__animated")
+    // dropbox.classList.remove("animate__shakeY")
 })
 dropbox.addEventListener("drop", (e)=>{
     e.preventDefault();
@@ -77,29 +79,12 @@ dropbox.addEventListener("drop", (e)=>{
     // read files when dropped
     reader = new FileReader();
     reader.onload= ()=>{
-        reader.result.split("\n").forEach(items =>{
-            document.getElementById("page1").childNodes[0].innerHTML+= '<div>'+items+'</div>';
-        });
+        var inputRadio = document.querySelector("input[name=\"choose\"]:checked");
+        if(inputRadio.id == "no"){
+            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result;
+        } else if(inputRadio.id == "yes"){
+            document.querySelector("div[contenteditable=\"true\"]").innerHTML = reader.result;
+        }
     }
     reader.readAsText(file);
 })
-// custom dropbox
-function minimize(){
-    background[0].classList.toggle("filter-background-blur");
-    background[0].classList.toggle("fullone")
-    background[0].classList.toggle("fixed-bottom");
-    background[1].classList.toggle("w-100");
-    background[1].classList.toggle("w-50");
-    background[1].classList.toggle("float-start");
-    input.classList.toggle("w-100");
-    input.classList.toggle("border", "border-1")
-    if(document.body.classList.toggle('overflow-hidden')){
-        document.body.classList.toggle('overflow-hidden')
-    }
-}
-function exit(){
-    background[0].classList.toggle("d-none")
-    if(document.body.classList.toggle('overflow-hidden')){
-        document.body.classList.toggle('overflow-hidden')
-    }
-}
