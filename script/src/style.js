@@ -1,7 +1,7 @@
 var bold = document.getElementById("bold"),
 italic = document.getElementById("italic"),
-underline = document.getElementById("underline"),
-fontcolor = document.getElementById("color");
+underline = document.getElementById("underline");
+const fontcolor = document.getElementById("color");
 
 // getting selected text
 underline.addEventListener("click", ()=>{
@@ -13,8 +13,11 @@ bold.addEventListener("click", ()=>{
 italic.addEventListener("click", ()=>{
     document.execCommand('italic')
 })
+// fontcolor.addEventListener("click", ()=>{
+//     fontcolor.value = "";
+// })
 fontcolor.addEventListener("change", ()=>{
-    document.execCommand("forecolor",false, fontcolor.value)
+    document.execCommand("forecolor", false, fontcolor.value)
 })
 
 // ---------------------------- font size --------------------------

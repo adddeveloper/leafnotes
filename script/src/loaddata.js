@@ -1,11 +1,10 @@
 // html element (ui)
 const dropbox = document.getElementById("dropbox"),
-input = document.getElementById("inputFile"),
 fileName = document.getElementById("fileName"),
 fileEx = document.getElementById("fileEx"),
 fileSave = document.getElementById("fileSave");
 // saved format
-var file, reader, type, titlename, typefile;
+var type, titlename, typefile;
 // file naming
 type =".txt";
 titlename = "untitled" + type;
@@ -51,19 +50,26 @@ fileSave.addEventListener("click", ()=>{
     saveFile();
 })
 // retrieving data
-reader = new FileReader();
-input.addEventListener("change", (e)=>{
-    file = input.files[input.files.length-1];
+const inputOpen = document.getElementById("inputFile");
+inputOpen.onchange=()=>{
+    var reader = new FileReader();
+    var file = inputOpen.files[0];
+    var inputRadioId = document.querySelector("input[name=\"choose\"]:checked").id;
     reader.onload= ()=>{
-        var inputRadio = document.querySelector("input[name=\"choose\"]:checked");
-        if(inputRadio.id == "no"){
-            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result;
-        } else if(inputRadio.id == "yes"){
+        console.log(inputRadioId, localStorage.getItem("choose"))
+        if(inputRadioId != "no"){
+            console.log(reader.result)
+            console.log("yes")
             document.querySelector("div[contenteditable=\"true\"]").innerHTML = reader.result;
+        } else if(inputRadioId != "yes"){
+            console.log("no")
+            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result;
         }
+        // document.getElementById("inputFile").click();
+        inputOpen.files[0] = "";
     }
-    reader.readAsText(file);    
-})
+    reader.readAsText(file);   
+}
 dropbox.addEventListener("dragover", (e)=>{
     // add a :hover class here
     e.preventDefault();
@@ -74,16 +80,19 @@ dropbox.addEventListener("dragleave", ()=>{
     // dropbox.classList.remove("animate__shakeY")
 })
 dropbox.addEventListener("drop", (e)=>{
+    var reader = new FileReader();
     e.preventDefault();
-    file = e.dataTransfer.files[0]
+    var file = e.dataTransfer.files[0];
     // read files when dropped
     reader = new FileReader();
     reader.onload= ()=>{
-        var inputRadio = document.querySelector("input[name=\"choose\"]:checked");
-        if(inputRadio.id == "no"){
-            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result;
-        } else if(inputRadio.id == "yes"){
+        var inputRadioId = document.querySelector("input[name=\"choose\"]:checked").id;        if(inputRadioId != "no"){
+            console.log(reader.result)
+            console.log("yes")
             document.querySelector("div[contenteditable=\"true\"]").innerHTML = reader.result;
+        } else if(inputRadioId != "yes"){
+            console.log("no")
+            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result;
         }
     }
     reader.readAsText(file);
