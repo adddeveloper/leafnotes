@@ -127,6 +127,11 @@
         <script>
             function clickinput(){
                 document.getElementById("inputFile").click();
+                if(document.getElementById("inputFile").click()){
+                    document.getElementById("inputFile").click();
+                } else{
+                    document.getElementById("inputFile").focus();
+                }
             }
         </script>
     </div>
