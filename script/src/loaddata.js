@@ -4,20 +4,30 @@ fileName = document.getElementById("fileName"),
 fileEx = document.getElementById("fileEx"),
 fileSave = document.getElementById("fileSave");
 // saved format
-var type, titlename, typefile;
+var titlename, typefile;
 // file naming
-type =".txt";
-titlename = "untitled" + type;
+titlename = "untitled" + ".txt";
 fileEx.addEventListener("change", ()=>{
-    type = fileEx.value;
-    if(fileName.value == ''){
-        titlename = "untitled" + type;
-    } else {
-        titlename = fileName.value + type;
+    if(fileEx.value == '' && fileName.value ==""){
+        titlename = "untitled" + ".txt";
+    } else if(fileEx.value != "" && fileName.value =="") {
+        titlename = "untitled" + fileEx.value;
+    } else if(fileEx.value == "" && fileName.value !="") {
+        titlename = fileName.value + ".txt";
+    } else if(fileEx.value != "" && fileName.value !="") {
+        titlename = fileName.value + fileEx.value;
     }
 })
 fileName.addEventListener("change", ()=>{
-    titlename = fileName.value + type;
+    if(fileEx.value == '' && fileName.value ==""){
+        titlename = "untitled" + ".txt";
+    } else if(fileEx.value != "" && fileName.value =="") {
+        titlename = "untitled" + fileEx.value;
+    } else if(fileEx.value == "" && fileName.value !="") {
+        titlename = fileName.value + ".txt";
+    } else if(fileEx.value != "" && fileName.value !="") {
+        titlename = fileName.value + fileEx.value;
+    }
 })
 document.querySelectorAll("input[name=\"choose\"]").forEach(el=>{
     el.addEventListener("change", ()=>{

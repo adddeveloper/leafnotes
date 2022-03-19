@@ -1,7 +1,7 @@
 var bold = document.getElementById("bold"),
 italic = document.getElementById("italic"),
 underline = document.getElementById("underline");
-const fontcolor = document.getElementById("color");
+const fontcolor = document.getElementById("colorsme");
 
 // getting selected text
 underline.addEventListener("click", ()=>{

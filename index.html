@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6096144611541062"
+     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,9 +85,11 @@
                         <!-- menu -->
                         <div class="my-1 align-items-center d-flex justify-content-evenly">
                             <div class="my-1 align-items-center d-flex justify-content-evenly">
-                                <button onclick="clickcolor()" class="mx-1 p-0 bg-secondary border-dark text-light py-0">
-                                    <b>A</b>
-                                    <input id="color" class="border-0 m-0 p-0" type="color" style="height: 7px;">
+                                <button id="colormeplz" onclick="function clickcolor(){
+                                    document.getElementById('color').click();
+                                    }clickcolor()" class="mx-1 p-0 bg-secondary border-dark text-light py-0">
+                                    <label class="px-3 d-flex align-items-center justify-content-center" for="colorsme">A</label>
+                                    <input id="colorsme" style="width: 0; height: 0;" class="opacity-0 border-0 m-0 p-0" type="color">
                                 </button>
                                 <button id="fontholder" class="mx-1 p-0 bg-secondary border-dark text-light py-0">
                                     <span id="up" style="border-right: solid;" class="me-1 border-1 border-dark">
@@ -123,9 +127,6 @@
         <script>
             function clickinput(){
                 document.getElementById("inputFile").click();
-            }
-            function clickcolor(){
-                document.getElementById('color').click();
             }
         </script>
     </div>
