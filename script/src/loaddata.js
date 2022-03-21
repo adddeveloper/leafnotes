@@ -72,8 +72,8 @@ inputOpen.onchange=()=>{
             console.log("yes")
             document.querySelector("div[contenteditable=\"true\"]").innerHTML = reader.result;
         } else if(inputRadioId != "yes"){
-            console.log("no")
-            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result;
+            console.log(reader.result)
+            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result.split("\n").join("\n");
         }
         // document.getElementById("inputFile").click();
         inputOpen.files[0] = "";
@@ -102,7 +102,7 @@ dropbox.addEventListener("drop", (e)=>{
             document.querySelector("div[contenteditable=\"true\"]").innerHTML = reader.result;
         } else if(inputRadioId != "yes"){
             console.log("no")
-            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result;
+            document.querySelector("div[contenteditable=\"true\"]").innerText = reader.result.split("\n").join("\n");
         }
     }
     reader.readAsText(file);
