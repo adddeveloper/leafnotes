@@ -57,14 +57,14 @@
         <!-- document holder -->
         <div id="dropbox" class="container-fluid document-element">
             <!-- document border -->
-            <div class="mt-5 my-1 align-items-center d-flex justify-content-center">
+            <div class="d-none mt-5 my-1 align-items-center d-flex justify-content-center">
                 <p class="px-3 p-0 m-0">Save and Load your files with style:</p>
                 <input type="radio" id="yes" name="choose">
                 <label class="me-3 mx-1" for="yes">YES</label>
                 <input type="radio" id="no" name="choose">
                 <label class="mx-1" for="no">NO</label>
             </div>
-            <div class="mb-2 m-0 p-0 align-items-center d-flex justify-content-center">
+            <div class="d-none mb-2 m-0 p-0 align-items-center d-flex justify-content-center">
                 <p class="px-3 p-0 m-0">(YES will save and load with the selected
                     style, while NO will save and load without the selected style)</p>
             </div>
@@ -115,10 +115,10 @@
                 </div>     
             </div>
         </div>
-        <p>
+        <p class="d-none">
             If you can't use drag and drop for some reason then you can just:
         </p>
-        <input onclick="function ereaseValue(e){
+        <input class="d-none" onclick="function ereaseValue(e){
             document.getElementById('inputFile').value = '';
         }ereaseValue()" 
         type="file" id="inputFile" class="mb-5 bg-dark text-light">
