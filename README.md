@@ -4,4 +4,4 @@ Visit the [website](https://leafnotes.netlify.app).
 
 ---
 Please contact if you see any problems or have something to say:
-(contact)[https://adnans.website]
+[contact](https://adnans.website)
